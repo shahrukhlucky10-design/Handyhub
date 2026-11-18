@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123c32"><title>Handyhub - Sikandra Rao</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--green:#123c32;--mint:#e8f3ed;--orange:#f29a38}*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7f5;color:#17231e}
+header{background:var(--green);color:white;padding:22px 16px 26px;border-radius:0 0 22px 22px}
+header h1{margin:0;font-size:27px}header p{margin:7px 0 0;color:#d8e8df}
+main{max-width:760px;margin:auto;padding:16px}.intro{background:white;padding:16px;border-radius:16px;margin-top:-10px;box-shadow:0 4px 18px #0000000c}
+h2{font-size:19px;margin:20px 0 12px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.service{background:white;border:1px solid #e6ece8;border-radius:14px;padding:15px;text-align:left;cursor:pointer;font-size:15px}
+.service span{display:block;font-size:27px;margin-bottom:7px}.service small{color:#64736b}
+form{background:white;padding:16px;border-radius:16px;margin-top:16px}
+label{display:block;font-size:13px;margin:12px 0 5px;color:#46564d}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ccd8d0;border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:75px;resize:vertical}button{border:0;background:var(--green);color:white;padding:13px 16px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer}
+.submit{width:100%;margin-top:16px;background:#18804f}.hint{font-size:12px;color:#69786f;line-height:1.5}
+footer{text-align:center;padding:24px;color:#718077;font-size:12px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style></head>
+<body>
+<header><h1>Handyhub</h1><p>Sikandra Rao ki local booking aur home delivery service</p></header>
+<main>
+<div class="intro"><b>Ek jagah, kai suvidhayein</b><p class="hint">Driver, ride, ghar ki services aur daily-use saman ki booking WhatsApp par bhejein.</p></div>
+<h2>Apni service chunein</h2>
+<div class="grid" id="services">
+<button class="service" data-service="Driver booking"><span>🚗</span>Driver booking<small>Personal driver</small></button>
+<button class="service" data-service="Car / Ride booking"><span>🚕</span>Car / Ride booking<small>Local ride request</small></button>
+<button class="service" data-service="Electrician"><span>💡</span>Electrician<small>Electrical work</small></button>
+<button class="service" data-service="Plumber"><span>🔧</span>Plumber<small>Pipe / tap repair</small></button>
+<button class="service" data-service="AC mechanic"><span>❄️</span>AC mechanic<small>Service / repair</small></button>
+<button class="service" data-service="Carpenter"><span>🪚</span>Carpenter<small>Wood work</small></button>
+<button class="service" data-service="Grocery"><span>🛒</span>Grocery<small>Daily essentials</small></button>
+<button class="service" data-service="Vegetables"><span>🥦</span>Vegetables<small>Fresh sabzi</small></button>
+<button class="service" data-service="Chicken"><span>🍗</span>Chicken<small>Fresh chicken</small></button>
+</div>
+<form id="booking">
+<h2>Booking details</h2>
+<label>Selected service</label><select id="service" required><option value="">Service chunein</option></select>
+<label>Aapka naam</label><input id="name" required placeholder="Naam">
+<label>Mobile number</label><input id="phone" required inputmode="tel" pattern="[0-9]{10}" placeholder="10 digit mobile number">
+<label>Delivery / pickup address</label><textarea id="address" required placeholder="Mohalla, gali, landmark..."></textarea>
+<label>Item / kaam / pickup-drop details</label><textarea id="details" placeholder="Jaise chicken 1 kg, pickup location aur destination, ya kaam ki detail"></textarea>
+<button class="submit" type="submit">WhatsApp par booking bhejein</button>
+<p class="hint">Booking WhatsApp par aapke message ke roop mein khulegi. Bhejne se pehle details check kar lein.</p>
+</form>
+</main><footer>Handyhub • Sikandra Rao</footer>
+<script>
+const select=document.getElementById('service');
+document.querySelectorAll('.service').forEach(btn=>{
+ const opt=document.createElement('option'); opt.value=btn.dataset.service; opt.textContent=btn.dataset.service; select.appendChild(opt);
+ btn.addEventListener('click',()=>{select.value=btn.dataset.service;document.getElementById('booking').scrollIntoView({behavior:'smooth'});});
+});
+document.getElementById('booking').addEventListener('submit',e=>{
+ e.preventDefault();
+ const msg=`Handyhub Booking%0AService: ${encodeURIComponent(select.value)}%0AName: ${encodeURIComponent(document.getElementById('name').value)}%0AMobile: ${encodeURIComponent(document.getElementById('phone').value)}%0AAddress: ${encodeURIComponent(document.getElementById('address').value)}%0ADetails: ${encodeURIComponent(document.getElementById('details').value)}`;
+ window.open('https://wa.me/918923375907?text='+msg,'_blank');
+});
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script></body></html>
