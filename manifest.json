@@ -1,0 +1,13 @@
+{
+  "background_color": "hsv(214, 3%, 89%)",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Handyhub",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Handy",
+  "start_url": "/",
+  "theme_color": "#123b70",
+  "id": "Handyhub",
+  "description": "Handyhub is your one-stop platform for home services, repairs, maintenance, cleaning, installation and other local services. Easily book trusted service providers and get convenient support through WhatsApp and phone."
+}
