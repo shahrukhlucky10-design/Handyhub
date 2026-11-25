@@ -6,7 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Handyhub - Home Services</title>
 <style>
-body{font-family:Arial;background:#f2f5fa;margin:0;color:#172033}
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Handyhub/service-worker.js")
+      .then(() => console.log("Handyhub App Ready"))
+      .catch(error => console.log(error));
+  });
+}
+</script>body{font-family:Arial;background:#f2f5fa;margin:0;color:#172033}
 header{background:#123b70;color:white;padding:25px;text-align:center}
 main{max-width:500px;margin:20px auto;padding:15px}
 .card{background:white;padding:20px;border-radius:14px;margin-bottom:15px}
